@@ -1,0 +1,5 @@
+streamlit
+icrawler
+requests
+beautifulsoup4
+lxml
