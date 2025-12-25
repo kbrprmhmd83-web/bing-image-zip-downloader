@@ -128,15 +128,17 @@ if st.button("Download & Build ZIP"):
 
             min_needed = max(1, int(int(limit) * float(min_fraction)))
 
-            if got < min_needed:
-                st.error(
-                    f"Only downloaded {got} images (minimum required: {min_needed}). "
-                    "Try a broader query, increase max rounds, or lower the minimum fraction."
-                )
+            if got == 0:
+                st.error("No images were downloaded. Try a broader query.")
                 st.stop()
+            if got < min_needed:
+                st.warning(
+                    f"Only downloaded {got} images (minimum target fraction was {min_needed}). "
+                    "Creating ZIP with available images."
+                )
 
             make_zip_from_folder(download_dir, zip_path)
-
+            
             with open(zip_path, "rb") as f:
                 zip_bytes = f.read()
 
